@@ -137,6 +137,7 @@
     <div class="controls">
       <input type="text" id="name" class="floatLabel" name="name" required>
       <label for="name">Name</label>
+	    
     </div>
     <div class="controls">
       <input type="text" id="email" class="floatLabel" name="email" required>
