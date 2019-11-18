@@ -36,7 +36,7 @@
 			$errors['phone'] = 'A phone is required';
 			} else{
 			$phone = $_POST['phone'];
-			if(!is_numeric($phone) && strlen($phone)==10){
+			if((is_numeric($phone)) && (strlen($phone)==10)){
 				$errors['phone'] = 'A valid phone number is required. eg. 9999999999';
 			}
 		}
@@ -63,13 +63,13 @@
 			$errors['postCode'] = 'A postCode is required';
 			} else{
 			$postCode = $_POST['postCode'];
-			if(!is_numeric($postCode) && strlen($postCode)==10){
+			if(is_numeric($postCode){
 				$errors['postCode'] = 'A valid postCode is required. eg. 781***';
 			}
 		}
 		// check state
 		if(empty($_POST['state'])){
-			$errors['state'] = 'A  is state required';
+			$errors['state'] = 'A state is state required';
 			} else{
 			$state = $_POST['state'];
 			if(!preg_match('/^[a-zA-Z\s]+$/', $state)){
@@ -92,7 +92,7 @@
 
 		//check ocassions
 		if(empty($_POST['ocassions'])){
-			$errors['ocassions'] = 'ocassions';
+			$errors['ocassions'] = 'an Ocassion is required';
 		} else{
 			$ocassions = $_POST['ocassions'];
 		}
@@ -229,25 +229,25 @@ BULLETS
       <div class="controls">
         <i class="fa fa-sort"></i>
         <select class="floatLabel" name="tableFor">
-          <option value="blank"></option>
+          <option value=""></option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4+</option>
         </select>
-        <label for="fruit" required><i class="fa fa-male"></i>&nbsp;&nbsp;Table For</label>
+        <label for="fruit"><i class="fa fa-male"></i>&nbsp;&nbsp;Table For</label>
       </div>      
     </div>
     <div class="col-1-3 col-1-3-sm">
     <div class="controls">
       <i class="fa fa-sort"></i>
       <select class="floatLabel" name="ocassions">
-        <option value="blank"></option>
+        <option value=""></option>
         <option value="deluxe">Casual</option>
         <option value="Zuri-zimmer">Birthday</option>
         <option value="Zuri-zimmer">Meeting</option>
       </select>
-      <label for="fruit" required>Ocassions</label>
+      <label for="fruit" >Ocassions</label>
      </div>     
     </div>
 
@@ -260,7 +260,7 @@ BULLETS
           <textarea name="comments" class="floatLabel"  id="comments"></textarea>
           <label for="comments">Other Requirements</label>
           </div>
-            <button type="submit" value="Submit" class="col-1-4">Submit</button>
+            <button type="submit" value="Submit" name="submit" class="col-1-4">Submit</button>
       </div>  
   </div> <!-- /.form-group -->
 </form>
