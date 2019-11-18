@@ -85,16 +85,16 @@
 				$tableFor = $_POST['tableFor'];
 			}
 
-			//check ocassions
-			if(empty($_POST['ocassions'])){
-				$errors['ocassions'] = 'ocassions';
-			} else{
-				$ocassions = $_POST['ocassions'];
-			}
-			// check comments
-			if(!empty($_POST['comments'])){
-				$comments = $_POST['comments'];
-			}
+		//check ocassions
+		if(empty($_POST['ocassions'])){
+			$errors['ocassions'] = 'ocassions';
+		} else{
+			$ocassions = $_POST['ocassions'];
+		}
+		// check comments
+		if(!empty($_POST['comments'])){
+			$comments = $_POST['comments'];
+		}
 
 		if(array_filter($errors)){
 			//echo 'errors in form';
