@@ -2,8 +2,10 @@
 	include('config/db_connect.php');
 	$name = $email = $phone = $street = $city = $postCode = $state = $date = $tableFor = $ocassions =$comments  = '';
 	$errors = array('name' => '', 'email' => '', 'phone' => '', 'street' => '', 'city' => '', 'postCode' => '', 'state' => '', 'date' => '', 'tableFor' => '', 'ocassions' => '', 'comments' => '' );
-	//check name 
+	
 	if(isset($_POST['submit'])){
+		
+		// check name
 		if(empty($_POST['name'])){
 			$errors['name'] = 'A name is required';
 		} else{
@@ -31,15 +33,6 @@
 			$phone = $_POST['phone'];
 			if(!is_numeric($phone) && strlen($phone)==10){
 				$errors['phone'] = 'A valid phone number is required. eg. 9999999999';
-			}
-		}
-		// check title
-		if(empty($_POST['title'])){
-			$errors['title'] = 'A title is required';
-		} else{
-			$title = $_POST['title'];
-			if(!preg_match('/^[a-zA-Z\s]+$/', $title)){
-				$errors['title'] = 'Title must be letters and spaces only';
 			}
 		}
 		// check street
