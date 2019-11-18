@@ -36,7 +36,7 @@
 			$errors['phone'] = 'A phone is required';
 			} else{
 			$phone = $_POST['phone'];
-			if(!(ctype_digit($phone) || strlen($phone) == 10)){
+			if(!(ctype_digit($phone)) || (!strlen($phone) == 10)){
 				$errors['phone'] = 'A valid phone number is required. eg. 9999999999';
 			}
 		}
@@ -63,7 +63,7 @@
 			$errors['postCode'] = 'A postCode is required';
 			} else{
 			$postCode = $_POST['postCode'];
-			if(!(ctype_digit($postCode) || strlen($postCode) == 6){
+			if(!(ctype_digit($phone)) || (!strlen($phone) == 10)){
 				$errors['postCode'] = 'A valid postCode is required. eg. 781***';
 			}
 		}
