@@ -1,5 +1,10 @@
 <?php
-	include('config/db_connect.php');
+	 //connect to the database
+	$conn = mysqli_connect('localhost', 'Babli', '12345', 'biba');
+	// check connection
+	if(!$conn){
+		echo 'Connection error: '. mysqli_connect_error();
+	}
 	$name = $email = $phone = $street = $city = $postCode = $state = $date = $tableFor = $ocassions =$comments  = '';
 	$errors = array('name' => '', 'email' => '', 'phone' => '', 'street' => '', 'city' => '', 'postCode' => '', 'state' => '', 'date' => '', 'tableFor' => '', 'ocassions' => '');
 	
@@ -101,14 +106,24 @@
 		} else {
 			// escape sql chars
 			$email = mysqli_real_escape_string($conn, $_POST['email']);
-			$title = mysqli_real_escape_string($conn, $_POST['title']);
-			$ingredients = mysqli_real_escape_string($conn, $_POST['ingredients']);
+			$name = mysqli_real_escape_string($conn, $_POST['name']);
+			$street = mysqli_real_escape_string($conn, $_POST['street']);
+			$phone = mysqli_real_escape_string($conn, $_POST['phone']);
+			$city = mysqli_real_escape_string($conn, $_POST['city']);
+			$tableFor = mysqli_real_escape_string($conn, $_POST['tableFor']);
+			$postCode = mysqli_real_escape_string($conn, $_POST['pinCode']);
+			$comments = mysqli_real_escape_string($conn, $_POST['comments']);
+			$ocassions = mysqli_real_escape_string($conn, $_POST['ocassions']);
+			$date = mysqli_real_escape_string($conn, $_POST['date']);
+			$state = mysqli_real_escape_string($conn, $_POST['state']);
+
 			// create sql
-			$sql = "INSERT INTO pizzas(title,email,ingredients) VALUES('$title','$email','$ingredients')";
+			$sql = "INSERT INTO reservation(Name, Email, Phone_number, Street, City, PostCode, State, rDate, Table_for, Ocassions, Other_requirements) VALUES('$name','$email','$phone', $street, $city, $postCode, $state, $date, $tableFor, $ocassions, $comments)";
 			// save to db and check
 			if(mysqli_query($conn, $sql)){
 				// success
-				header('Location: index.php');
+				//header('Location: index.php');
+				echo ' <script type = "text/javascript"> alert("reservation form submitted successfully")</script>';
 			} else {
 				echo 'query error: '. mysqli_error($conn);
 			}
@@ -125,32 +140,56 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> 
 	<script src="https://raw.githubusercontent.com/andiio/selectToAutocomplete/master/jquery-ui-autocomplete.js"></script>
 	<script src="https://raw.githubusercontent.com/andiio/selectToAutocomplete/master/jquery.select-to-autocomplete.js"></script>
+<!--RED COLOR
+LEFT ALIGN 
+BULLETS
+-->	
+<style>
 	
+	#error>ul{
+		color: red;
+		text-align: left;
+  		list-style-type: circle;
+  		padding-bottom: 15px;
+  		padding-left: 15px;
+}
+</style>
+	
+
 </head>
 <body>
 
-	<form action="">
-		<div id="error"> <p><em><?php echo  ?></em></p></div>
+	<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
+		<div id="error"><ul>
+				<?php foreach ($errors as $key => $value):
+							if(!empty($value)){
+
+				 ?>
+				<li><?php echo  $value; ?></li>
+			<?php } ?>
+				<?php endforeach; ?>
+						</ul>
+		</div>
   <!--  General -->
   <div class="form-group">
     <h2 class="heading">Booking & contact</h2>
     <div class="controls">
-      <input type="text" id="name" class="floatLabel" name="name" required>
+      <input type="text" id="name" class="floatLabel" name="name" >
       <label for="name">Name</label>
 	    
     </div>
     <div class="controls">
-      <input type="text" id="email" class="floatLabel" name="email" required>
+      <input type="text" id="email" class="floatLabel" name="email" >
       <label for="email">Email</label>
     </div>       
     <div class="controls">
-      <input type="tel" id="phone" class="floatLabel" name="phone" required>
+      <input type="tel" id="phone" class="floatLabel" name="phone" >
       <label for="phone">Phone</label>
     </div>
       <div class="grid">
         <div class="col-2-3">
           <div class="controls">
-           <input type="text" id="street" class="floatLabel" name="street" required>
+           <input type="text" id="street" class="floatLabel" name="street" >
            <label for="street">Street</label>
           </div>          
         </div>
@@ -158,19 +197,19 @@
       <div class="grid">
         <div class="col-2-3">
           <div class="controls">
-            <input type="text" id="city" class="floatLabel" name="city" required>
+            <input type="text" id="city" class="floatLabel" name="city" >
             <label for="city">City</label>
           </div>         
         </div>
         <div class="col-1-3">
           <div class="controls">
-            <input type="text" id="post-code" class="floatLabel" name="postCode" required>
+            <input type="text" id="post-code" class="floatLabel" name="postCode" >
             <label for="post-code">Post Code</label>
           </div>         
         </div>
       </div>
       <div class="controls">
-        <input type="text" id="country" class="floatLabel" name="state" required>
+        <input type="text" id="country" class="floatLabel" name="state" >
         <label for="country">State</label>
       </div>
   </div>
@@ -180,7 +219,7 @@
     <div class="grid">
     <div class="col-1-4 col-1-4-sm">
       <div class="controls">
-        <input type="date" id="arrive" class="floatLabel" name="date" value="<?php echo date('Y-m-d'); ?>"  required>
+        <input type="date" id="arrive" class="floatLabel" name="rdate" value="<?php echo date('Y-m-d'); ?>" >
         <label for="arrive" class="label-date"><i class="fa fa-calendar"></i>&nbsp;&nbsp;Date</label>
       </div>      
     </div>
