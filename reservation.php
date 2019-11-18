@@ -36,7 +36,7 @@
 			$errors['phone'] = 'A phone is required';
 			} else{
 			$phone = $_POST['phone'];
-			if((is_numeric($phone)) && (strlen($phone)==10)){
+			if((!is_numeric($phone))){
 				$errors['phone'] = 'A valid phone number is required. eg. 9999999999';
 			}
 		}
@@ -63,7 +63,7 @@
 			$errors['postCode'] = 'A postCode is required';
 			} else{
 			$postCode = $_POST['postCode'];
-			if(is_numeric($postCode){
+			if(!is_numeric($postCode)){
 				$errors['postCode'] = 'A valid postCode is required. eg. 781***';
 			}
 		}
@@ -219,7 +219,7 @@ BULLETS
     <div class="grid">
     <div class="col-1-4 col-1-4-sm">
       <div class="controls">
-        <input type="date" id="arrive" class="floatLabel" name="rdate" value="<?php echo date('Y-m-d'); ?>" >
+        <input type="date" id="arrive" class="floatLabel" name="date" value="<?php echo date('Y-m-d'); ?>" >
         <label for="arrive" class="label-date"><i class="fa fa-calendar"></i>&nbsp;&nbsp;Date</label>
       </div>      
     </div>
