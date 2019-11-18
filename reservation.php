@@ -36,7 +36,7 @@
 			$errors['phone'] = 'A phone is required';
 			} else{
 			$phone = $_POST['phone'];
-			if((!is_numeric($phone))){
+			if(!(ctype_digit($phone) || strlen($phone) == 10)){
 				$errors['phone'] = 'A valid phone number is required. eg. 9999999999';
 			}
 		}
@@ -63,7 +63,7 @@
 			$errors['postCode'] = 'A postCode is required';
 			} else{
 			$postCode = $_POST['postCode'];
-			if(!is_numeric($postCode)){
+			if(!(ctype_digit($postCode) || strlen($postCode) == 6){
 				$errors['postCode'] = 'A valid postCode is required. eg. 781***';
 			}
 		}
@@ -183,7 +183,7 @@ BULLETS
       <label for="email">Email</label>
     </div>       
     <div class="controls">
-      <input type="tel" id="phone" class="floatLabel" name="phone" >
+      <input type="text" id="phone" class="floatLabel" name="phone" >
       <label for="phone">Phone</label>
     </div>
       <div class="grid">
@@ -233,7 +233,7 @@ BULLETS
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
-          <option value="4">4+</option>
+          <option value="4+">4+</option>
         </select>
         <label for="fruit"><i class="fa fa-male"></i>&nbsp;&nbsp;Table For</label>
       </div>      
@@ -243,9 +243,9 @@ BULLETS
       <i class="fa fa-sort"></i>
       <select class="floatLabel" name="ocassions">
         <option value=""></option>
-        <option value="deluxe">Casual</option>
-        <option value="Zuri-zimmer">Birthday</option>
-        <option value="Zuri-zimmer">Meeting</option>
+        <option value="Casual">Casual</option>
+        <option value="Birthday">Birthday</option>
+        <option value="Meeting">Meeting</option>
       </select>
       <label for="fruit" >Ocassions</label>
      </div>     
