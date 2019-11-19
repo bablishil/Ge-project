@@ -17,16 +17,18 @@
         $sql = "select Id from user where username = '$username' and password = '$password'";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-        $active = $row['active'];
+        //$active = $row['active'];
         $count = mysqli_num_rows($result);
+        echo 'hey';
         if($count == 1){
+            echo "hola";
 
 
 
 
         session_register("username");
         $_SESSION['login_user'] = '$username';
-        header("Location:GE-project/Admin/Admin.php ");
+        header("Location : /Admin.php ");
 
         }
     }else{
