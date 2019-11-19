@@ -8,10 +8,9 @@
     if(!$conn){
         echo 'Connection error: '. mysqli_connect_error();
     }
-    $name = $email = $phone = $street = $city = $postCode = $state = $date = $tableFor = $ocassions =$comments  = '';
-    $errors = array('name' => '', 'email' => '', 'phone' => '', 'street' => '', 'city' => '', 'postCode' => '', 'state' => '', 'date' => '', 'tableFor' => '', 'ocassions' => '');
+   
     session_start();
-    if($_SERVER["REQUEST_METHOD"] == "POST"){
+    if(isset($_POST['submit'])){
         /// user name and password sent from form
         $username = mysqli_real_escape_string($conn, $_POST["username"]);
         $password = mysqli_real_escape_string($conn, $_POST["password"]);
@@ -26,8 +25,8 @@
 
 
         session_register("username");
-        $_Session['login_user'] = '$username';
-        header("location: Admin.php ");
+        $_SESSION['login_user'] = '$username';
+        header("Location:GE-project/Admin/Admin.php ");
 
         }
     }else{

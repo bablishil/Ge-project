@@ -4,10 +4,7 @@
 	if(!$conn){
 		echo 'Connection error: '. mysqli_connect_error();
 	}
-	$name = $email = $phone = $street = $city = $postCode = $state = $date = $tableFor = $ocassions =$comments  = '';
-	$errors = array('name' => '', 'email' => '', 'phone' => '', 'street' => '', 'city' => '', 'postCode' => '', 'state' => '', 'date' => '', 'tableFor' => '', 'ocassions' => 
-
-?>
+	
 session_start();
    
    $user_check = $_SESSION['login_user'];
@@ -22,3 +19,6 @@ session_start();
       header("location: login.php");
       die();
    }
+
+
+   ?>
