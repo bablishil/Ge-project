@@ -1,7 +1,5 @@
 
 <?php 
-
-
  //connect to the database
     $conn = mysqli_connect('localhost', 'Babli', '12345', 'biba');
     // check connection
@@ -23,18 +21,16 @@
         if($count == 1){
             echo "hola";
 
-
-
-
-        session_register("username");
+      //  session_register("username");
         $_SESSION['login_user'] = '$username';
-        header("Location : /Admin.php ");
-
-        }
-    }else{
-        $error = "Invalid username or password";
-        echo  "<script> alert($error);</script>";
+        //header("location : http://localhost:8012/GE-project/Admin/Admin.php ");
+        echo "<script> alert('login successful')</script>"; 
     }
+        }
+        else{
+             $error = "Invalid username or password";
+             echo  "<script> alert($error);</script>";
+        }
  ?>
 
 
