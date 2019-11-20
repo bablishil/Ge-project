@@ -17,15 +17,14 @@
         $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
         //$active = $row['active'];
         $count = mysqli_num_rows($result);
-        echo 'hey';
+       
         if($count == 1){
-            echo "hola";
+            
 
-      //  session_register("username");
+     
         $_SESSION['login_user'] = '$username';
-        //header("location : http://localhost:8012/GE-project/Admin/Admin.php ");
-        echo "<script> alert('login successful')</script>"; 
-    }
+        header("location : Admin.php");
+        
         }
         else{
              $error = "Invalid username or password";
