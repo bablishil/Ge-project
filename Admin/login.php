@@ -8,12 +8,13 @@
     }
    
     session_start();
-    if(isset($_POST['submit'])){
+    if($_SERVER["REQUEST_METHOD"]=="POST"){
         /// user name and password sent from form
         $username = mysqli_real_escape_string($conn, $_POST["username"]);
         $password = mysqli_real_escape_string($conn, $_POST["password"]);
         $sql = "select Id from user where username = '$username' and password = '$password'";
         $result = mysqli_query($conn, $sql);
+        echo '$result';
         $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
         //$active = $row['active'];
         $count = mysqli_num_rows($result);
@@ -30,6 +31,7 @@
              $error = "Invalid username or password";
              echo  "<script> alert($error);</script>";
         }
+    }
  ?>
 
 

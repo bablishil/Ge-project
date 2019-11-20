@@ -29,7 +29,7 @@
 
 <link rel="stylesheet" type="text/css" href="../css/Admin.css">
 
-  <title></title>
+  <title>Admin Panel</title>
 </head>
 <body>
 <table class="flat-table">
@@ -57,6 +57,7 @@ foreach ($data as $det) {
   <?php } ?>
   </tbody>
 	</table>
+  <div class="logout"> <h2><a href="logout.php">LOG OUT</a></h2></div>
 </body >
 </html>
 <!-- login page 
