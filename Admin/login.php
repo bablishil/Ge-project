@@ -13,10 +13,10 @@
         $username = mysqli_real_escape_string($conn, $_POST["username"]);
         $password = mysqli_real_escape_string($conn, $_POST["password"]);
         $sql = "select Id from user where username = '$username' and password = '$password'";
-        $result = mysqli_query($conn, $sql);
-        echo '$result';
+        $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+        
         $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-        //$active = $row['active'];
+        
         $count = mysqli_num_rows($result);
        
         if($count == 1){

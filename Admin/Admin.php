@@ -57,7 +57,7 @@ foreach ($data as $det) {
   <?php } ?>
   </tbody>
 	</table>
-  <div class="logout"> <h2><a href="logout.php">LOG OUT</a></h2></div>
+  <div class="logout"> <h2><a href="Logout.php">LOG OUT</a></h2></div>
 </body >
 </html>
 <!-- login page 
