@@ -10,16 +10,9 @@
   $sql = "SELECT Id, Name, Phone_number, Table_for, Ocassions, rDate,  Other_requirements FROM reservation";
   $result = mysqli_query($conn, $sql);
   $data = mysqli_fetch_all($result, MYSQLI_ASSOC);
- /* foreach ($data as $det) {
-    foreach ($det as $key => $value) {
-      echo $key . " " . $value;
-      # code...
-    }
-  }
+
   mysqli_free_result($result);
    mysqli_close($conn);
-
-  ?>*/
   ?>
 
 <!DOCTYPE html>
@@ -35,29 +28,46 @@
 <table class="flat-table">
   <tbody>
     <tr>
-      <th>Id</th>
+     
       <th>Name</th>
       <th>Phone</th>
       <th>Number of Person</th>
       <th>Occassion</th>
       <th>Date</th>
       <th>Other Requirements</th>
+      <th>status</th>
+       <th>Id</th>
+       <th></th>
+      <th></th>
+
     </tr>
-      <?php 
+<?php 
 foreach ($data as $det) {
+  $i = 0;
+  $arr = array();
   ?>
   <tr>
     <?php  foreach ($det as $key => $value) {
-      echo "<td> $value </td>";
-      # code...
+      if($key == "Id"){
+        array_push($arr, $value);
+         echo "<td> ++$i </td>";
+      }
+     else{
+       echo "<td> $value </td>";
+       }
     } 
-  
-       ?> 
+    echo"<td><form action='Admin.php' method='post'>
+    <button type='submit' name='confirm' value='$arr[$i-1]'>confirm</button>
+</form> </td>";
+ echo"<td><form action='Admin.php' method='post'>
+     <button type='submit' name='delete' value='$arr[$i-1]'>delete</button>
+</form> </td>";
+ ?> 
     </tr>
   <?php } ?>
   </tbody>
 	</table>
-  <div class="logout"> <h2><a href="Logout.php">LOG OUT</a></h2></div>
+  <div class="logout"> <h2><a href="Logout.php">LOGOUT</a></h2></div>
 </body >
 </html>
 <!-- login page 

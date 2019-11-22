@@ -8,40 +8,27 @@
     }
    
     session_start();
-    if($_SERVER["REQUEST_METHOD"]=="POST"){
+    if(isset($_POST["submit"])){
         /// user name and password sent from form
         $username = mysqli_real_escape_string($conn, $_POST["username"]);
         $password = mysqli_real_escape_string($conn, $_POST["password"]);
         $sql = "select Id from user where username = '$username' and password = '$password'";
         $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
         
-        $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+        $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
         
         $count = mysqli_num_rows($result);
        
         if($count == 1){
-            
-
-     
-        $_SESSION['login_user'] = '$username';
-        header("location : Admin.php");
-        
+            $_SESSION['login_user'] = '$username';
+            header("location:Admin.php");
         }
         else{
-             $error = "Invalid username or password";
-             echo  "<script> alert($error);</script>";
+             
+             echo  "<script> alert('Invalid username or password');</script>";
         }
     }
  ?>
-
-
-
-
-
-
-
-
-
 
 
 <!DOCTYPE html>
