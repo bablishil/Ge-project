@@ -1,5 +1,5 @@
 <?php 
-
+echo "problem 0";
 
 if(isset($_POST["submit"])){
 
@@ -8,6 +8,7 @@ if(isset($_POST["submit"])){
 
 $errors = '';
 $myemail = 'bablishil16@gmail.com';
+echo "problem1";
 
 if(empty($_POST['name'])  || 
    empty($_POST['email']) || 
@@ -26,8 +27,8 @@ $email_address))
 {
     $errors .= "\n Error: Invalid email address";
 }
-
-if( empty($errors))
+echo "problem";
+if(empty($errors))
 
 {
 
@@ -35,9 +36,7 @@ $to = $myemail;
 
 $email_subject = "Contact form submission: $name";
 
-$email_body = "You have received a new message. ".
-
-" Here are the details:\n Name: $name \n ".
+$email_body = "You have received a new message. "." Here are the details:\n Name: $name \n ".
 
 "Email: $email_address\n Message \n $message";
 
