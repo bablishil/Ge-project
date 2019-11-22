@@ -1,3 +1,4 @@
+<?php include 'contact_form.php' ?>
 <!DOCTYPE HTML>
 
 <html>
@@ -112,7 +113,7 @@
 				<div class="col-md-12">
 					<div class="col-md-6 animate-box">
 					<h3>Get In Touch</h3>
-					<form action = "<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
+					<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
 						<div class="row form-group">
 							<div class="col-md-12">
 								<label class="sr-only" for="name">Name</label>
@@ -138,7 +139,7 @@
 						</div>
 
 					</form>	
-					<h2><?php include "contact_form.php" ?></h2>	
+					
 				</div>
 				<div class="col-md-5 col-md-push-1 animate-box">
 					
