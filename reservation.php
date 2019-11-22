@@ -36,7 +36,7 @@
 			$errors['phone'] = 'A phone is required';
 			} else{
 			$phone = $_POST['phone'];
-			if(!(ctype_digit($phone)) || (!strlen($phone) == 10)){
+			if(!(ctype_digit($phone)) || !(strlen($phone) == 10)){
 				$errors['phone'] = 'A valid phone number is required. eg. 9999999999';
 			}
 		}
@@ -63,7 +63,7 @@
 			$errors['postCode'] = 'A postCode is required';
 			} else{
 			$postCode = $_POST['postCode'];
-			if(!(ctype_digit($phone)) || (!strlen($phone) == 10)){
+			if(!(ctype_digit($postCode)) || !(strlen($postCode) == 6)){
 				$errors['postCode'] = 'A valid postCode is required. eg. 781***';
 			}
 		}
@@ -106,23 +106,24 @@
 		} else {
 			// escape sql chars
 			$email = mysqli_real_escape_string($conn, $_POST['email']);
-			$name = mysqli_real_escape_string($conn, $_POST['name']);
-			$street = mysqli_real_escape_string($conn, $_POST['street']);
+			$name = mysqli_real_escape_string($conn, ucwords($_POST['name']));
+			$street = mysqli_real_escape_string($conn,ucwords($_POST['street']));
 			$phone = mysqli_real_escape_string($conn, $_POST['phone']);
 			$city = mysqli_real_escape_string($conn, $_POST['city']);
 			$tableFor = mysqli_real_escape_string($conn, $_POST['tableFor']);
-			$postCode = mysqli_real_escape_string($conn, $_POST['pinCode']);
+			$postCode = mysqli_real_escape_string($conn, $_POST['postCode']);
 			$comments = mysqli_real_escape_string($conn, $_POST['comments']);
 			$ocassions = mysqli_real_escape_string($conn, $_POST['ocassions']);
 			$date = mysqli_real_escape_string($conn, $_POST['date']);
 			$state = mysqli_real_escape_string($conn, $_POST['state']);
+			$Id = md5($email).uniqid();
 
 			// create sql
-			$sql = "INSERT INTO reservation(Name, Email, Phone_number, Street, City, PostCode, State, rDate, Table_for, Ocassions, Other_requirements) VALUES('$name','$email','$phone', $street, $city, $postCode, $state, $date, $tableFor, $ocassions, $comments)";
+			$sql = "INSERT INTO reservation(Name, Email, Phone_number, Street, City, PostCode, State, rDate, Table_for, Ocassions, Other_requirements, cStatus) VALUES($name', '$email', '$phone', '$street', '$city', '$postCode', '$state', '$date', '$tableFor', '$ocassions', '$comments', 'Pending', '$id')";
 			// save to db and check
 			if(mysqli_query($conn, $sql)){
 				// success
-				//header('Location: index.php');
+				header('location: index.php');
 				echo ' <script type = "text/javascript"> alert("reservation form submitted successfully")</script>';
 			} else {
 				echo 'query error: '. mysqli_error($conn);
@@ -170,6 +171,7 @@ BULLETS
 				<?php endforeach; ?>
 						</ul>
 		</div>
+
   <!--  General -->
   <div class="form-group">
     <h2 class="heading">Booking & contact</h2>
