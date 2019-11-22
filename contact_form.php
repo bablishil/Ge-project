@@ -6,9 +6,9 @@ if(isset($_POST["submit"])){
 
 
 
-
 $errors = '';
 $myemail = 'bablishil16@gmail.com';
+
 if(empty($_POST['name'])  || 
    empty($_POST['email']) || 
    empty($_POST['message']))
@@ -44,15 +44,20 @@ $email_body = "You have received a new message. ".
 $headers = "From: $myemail\n";
 
 $headers .= "Reply-To: $email_address";
+echo 'he';
 
 mail($to,$email_subject,$email_body,$headers);
 
 //redirect to the 'thank you' page
-
-header('location:thankyou.html');
+echo 'hey';
+header('location: thankyou.html');
 
 }
 
 
 
-} ?>
+} 
+else{
+	echo "hoii";
+}
+?>
