@@ -7,13 +7,14 @@ if(isset($_POST["submit"])){
 
 
 $errors = '';
-$myemail = 'bablishil16@gmail.com';
+$myemail = 'bibekkakati0@gmail.com';
 echo "problem1";
 
 if(empty($_POST['name'])  || 
    empty($_POST['email']) || 
    empty($_POST['message']))
 {
+	echo "empty";
     $errors .= "\n Error: all fields are required";
 }
 
@@ -21,17 +22,18 @@ $name = $_POST['name'];
 $email_address = $_POST['email']; 
 $message = $_POST['message']; 
 
-if (!preg_match(
+/*if (!preg_match(
 "/^[_a-z0-9-]+(\.[_a-z0-9-]+)@[a-z0-9-]+(\.[a-z0-9-]+)(\.[a-z]{2,3})$/i", 
 $email_address))
 {
+	echo "email";
     $errors .= "\n Error: Invalid email address";
-}
+}*/
 echo "problem";
 if(empty($errors))
 
 {
-
+	echo $errors;
 $to = $myemail;
 
 $email_subject = "Contact form submission: $name";
@@ -45,11 +47,11 @@ $headers = "From: $myemail\n";
 $headers .= "Reply-To: $email_address";
 echo 'he';
 
-mail($to,$email_subject,$email_body,$headers);
+$Temp = email($to,$email_subject,$email_body,$headers);
 
 //redirect to the 'thank you' page
-echo 'hey';
-header('location: thankyou.html');
+echo $Temp;
+//header('location: thankyou.html');
 
 }
 
