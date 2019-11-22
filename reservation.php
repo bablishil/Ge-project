@@ -119,7 +119,7 @@
 			$Id = md5($email).uniqid();
 
 			// create sql
-			$sql = "INSERT INTO reservation(Name, Email, Phone_number, Street, City, PostCode, State, rDate, Table_for, Ocassions, Other_requirements, cStatus) VALUES($name', '$email', '$phone', '$street', '$city', '$postCode', '$state', '$date', '$tableFor', '$ocassions', '$comments', 'Pending', '$id')";
+			$sql = "INSERT INTO reservation(Name, Email, Phone_number, Street, City, PostCode, State, rDate, Table_for, Ocassions, Other_requirements, cStatus, Id) VALUES($name', '$email', '$phone', '$street', '$city', '$postCode', '$state', '$date', '$tableFor', '$ocassions', '$comments', 'Pending', '$Id')";
 			// save to db and check
 			if(mysqli_query($conn, $sql)){
 				// success
