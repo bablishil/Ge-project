@@ -112,19 +112,19 @@
 				<div class="col-md-12">
 					<div class="col-md-6 animate-box">
 					<h3>Get In Touch</h3>
-					<form action="contact_form.php" method="POST">
+					<form action = "<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
 						<div class="row form-group">
 							<div class="col-md-12">
-								<label class="sr-only" for="name" name = "name">Name</label>
-								<input type="text" id="name" class="form-control" placeholder="Your name">
+								<label class="sr-only" for="name">Name</label>
+								<input type="text" id="name"  name="name" class="form-control" placeholder="Your name">
 							</div>
 							
 						</div>
 
 						<div class="row form-group">
 							<div class="col-md-12">
-								<label class="sr-only" for="email" name = "Email">Email</label>
-								<input type="text" id="email" class="form-control" placeholder="Your email address">
+								<label class="sr-only" for="email" >Email</label>
+								<input type="text" id="email" name="email" class="form-control" placeholder="Your email address">
 							</div>
 						</div>
 						<div class="row form-group">
@@ -134,10 +134,11 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<input type="submit" name="submit" value="Send Message" class="btn btn-primary">
+							<button type="submit" name="submit" value="Send Message" class="btn btn-primary">Submit</button>
 						</div>
 
-					</form>		
+					</form>	
+					<h2><?php include "contact_form.php" ?></h2>	
 				</div>
 				<div class="col-md-5 col-md-push-1 animate-box">
 					
