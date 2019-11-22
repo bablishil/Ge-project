@@ -7,7 +7,7 @@
     echo 'Connection error: '. mysqli_connect_error();
   }
 
-  $sql = "SELECT Id, Name, Phone_number, Table_for, Ocassions, rDate,  Other_requirements FROM reservation";
+  $sql = "SELECT  Name, Phone_number, Table_for, Ocassions, rDate,  Other_requirements, cStatus, Id FROM reservation ";
   $result = mysqli_query($conn, $sql);
   $data = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
