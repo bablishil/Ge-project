@@ -125,14 +125,15 @@
 			$state = mysqli_real_escape_string($conn, $_POST['state']);
 			$Id = md5($email).uniqid();
 			 $price = 350000;
-			if($_POST['submit'] = 'book'){
-				// create sql
+			
+			// create sql
 					$sql = "INSERT INTO reservation(Name, Email, Phone_number, Street, City, PostCode, State, rDate, Table_for, Ocassions, Other_requirements, cStatus, id, paymentid) VALUES('$name', '$email', '$phone', '$street', '$city', '$postCode', '$state', '$date', '$tableFor', '$ocassions', '$comments', 'Pending', '$Id', '')";
 
-			}
-			if($_POST['book'] = 'pay'){
+			
+			if(isset($_POST['book'])){
 
 				$order=$api->order->create(array('amount' => $price, 'currency' => 'INR')); 
+				echo "<script>console.log($order.order_id)</script>";
 
 
 					if(!empty($order)){
@@ -180,8 +181,8 @@
 			// save to db and check
 			if(mysqli_query($conn, $sql)){
 				// success
-				header('location:../index.php');
-				echo ' <script type = "text/javascript"> alert("reservation form submitted successfully")</script>';
+				header('location: ../index.php');
+				// echo ' <script type = "text/javascript"> alert("reservation form submitted successfully")</script>';
 			} else {
 				echo 'query error: '. mysqli_error($conn);
 			}
