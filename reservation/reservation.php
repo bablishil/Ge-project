@@ -133,10 +133,13 @@
 			if(isset($_POST['book'])){
 
 				$order = $api->order->create(array('amount' => $price, 'currency' => 'INR')); 
-				echo "<script>console.log($order->id)</script>";
+				
 
-
+					
 					if(!empty($order)){
+
+
+						
 							echo "<script src='https://checkout.razorpay.com/v1/checkout.js'></script>
 									<script>
 										var options = {
@@ -146,15 +149,17 @@
     									'name': 'Kionion',
     									'description': '',
     									'image': 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT2FwmyVgeSlIWe9vcMo7LJCmhjO9ioWf3NdTjY2p8Mp3YcP7EA',
-    									'order_id': '$order',
+    									'order_id': '$order->id',
     									'handler': function (response){
-        								      alert(response.razorpay_payment_id);
+        								     var input = document.getElementById('payid');
+        								     input.value = response.razorpay_payment_id;
    										 },
     									'prefill': {
     									    'name': '$name',
     									    'email': '$email',
     									    'contact': '$phone'
     									    },
+   						
    											'notes': {
     									    	'address': '$street',
    											 },
@@ -171,9 +176,9 @@
 									r();
 							</script>";
 					}
-			
+			$paymentid = $_POST['payid'];
 				// create sql
-					$sql = "INSERT INTO reservation(Name, Email, Phone_number, Street, City, PostCode, State, rDate, Table_for, Ocassions, Other_requirements, cStatus, id) VALUES('$name', '$email', '$phone', '$street', '$city', '$postCode', '$state', '$date', '$tableFor', '$ocassions', '$comments', 'Pending', '$Id')";
+					$sql = "INSERT INTO reservation(Name, Email, Phone_number, Street, City, PostCode, State, rDate, Table_for, Ocassions, Other_requirements, cStatus, id, paymentid) VALUES('$name', '$email', '$phone', '$street', '$city', '$postCode', '$state', '$date', '$tableFor', '$ocassions', '$comments', 'Pending', '$Id', '$paymentid')";
 
 			}
 
@@ -328,6 +333,7 @@ BULLETS
             <button style="padding-left: 10px; background-color: #00ff88; font-weight: bold;" type="submit" value="pay" name="book" class="col-1-4">BOOK & PAY WITH JUST $5</button>
       </div>  
   </div> <!-- /.form-group -->
+  <input type="hidden" id="payid" value="" name="payid"/>
 </form>
 
 
