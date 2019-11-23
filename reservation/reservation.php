@@ -132,8 +132,8 @@
 			
 			if(isset($_POST['book'])){
 
-				$order=$api->order->create(array('amount' => $price, 'currency' => 'INR')); 
-				echo "<script>console.log($order.order_id)</script>";
+				$order=$api->Order->create(array('amount' => $price, 'currency' => 'INR')); 
+				echo "<script>console.log($order.id)</script>";
 
 
 					if(!empty($order)){
