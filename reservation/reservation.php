@@ -124,13 +124,64 @@
 			$date = mysqli_real_escape_string($conn, $_POST['date']);
 			$state = mysqli_real_escape_string($conn, $_POST['state']);
 			$Id = md5($email).uniqid();
-			$price = '350';
-			if($_POST['submit' = "Submit"]){
+			// $price = '350';
+			if($_POST['submit'] = 'book'){
+				// create sql
+					$sql = "INSERT INTO reservation(Name, Email, Phone_number, Street, City, PostCode, State, rDate, Table_for, Ocassions, Other_requirements, cStatus, id, paymentid) VALUES('$name', '$email', '$phone', '$street', '$city', '$postCode', '$state', '$date', '$tableFor', '$ocassions', '$comments', 'Pending', '$Id', '')";
+
+			}
+			if($_POST['book'] = 'pay'){
+
+				$order  = $api->order->create(array('amount' => 350, 'currency' => 'INR')); // Creates order
+
+
+					if(empty(!$order)){
+							echo "<script src='https://checkout.razorpay.com/v1/checkout.js'></script>
+									<script>
+										var options = {
+    										'key': 'rzp_test_Q74V3QfdCceNFV', // Enter the Key ID generated from the Dashboard
+    									'amount': '50000', // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise or INR 500.
+    									'currency': 'INR',
+    									'name': 'Acme Corp',
+    									'description': 'A Wild Sheep Chase is the third novel by Japanese author  Haruki Murakami',
+    									'image': 'https://example.com/your_logo',
+    									'order_id': 'order_9A33XWu170gUtm',//This is a sample Order ID. Create an Order using Orders API. (https://razorpay.com/docs/payment-gateway/orders/integration/#step-1-create-an-order). Refer the Checkout form table given below
+    									'handler': function (response){
+        								alert(response.razorpay_payment_id);
+   										 },
+    									'prefill': {
+    									    'name': 'Gaurav Kumar',
+    									    'email': 'gaurav.kumar@example.com',
+    									    'contact': '9999999999'
+    									    },
+   											   'notes': {
+    									    'address': 'note value'
+   											 },
+    									'theme': {
+   										     'color': '#F37254'
+    
+										};
+									var rzp1 = new Razorpay(options);
+									document.getElementById('rzp-button1').onclick = function(e){
+									    rzp1.open();
+    									e.preventDefault();
+									}
+							</script>";
+					}
+
+
+
+
+
+
+
+
+				// create sql
+					$sql = "INSERT INTO reservation(Name, Email, Phone_number, Street, City, PostCode, State, rDate, Table_for, Ocassions, Other_requirements, cStatus, id) VALUES('$name', '$email', '$phone', '$street', '$city', '$postCode', '$state', '$date', '$tableFor', '$ocassions', '$comments', 'Pending', '$Id')";
 
 			}
 
-			// create sql
-			$sql = "INSERT INTO reservation(Name, Email, Phone_number, Street, City, PostCode, State, rDate, Table_for, Ocassions, Other_requirements, cStatus, id) VALUES('$name', '$email', '$phone', '$street', '$city', '$postCode', '$state', '$date', '$tableFor', '$ocassions', '$comments', 'Pending', '$Id')";
+			
 			// save to db and check
 			if(mysqli_query($conn, $sql)){
 				// success
@@ -277,8 +328,8 @@ BULLETS
           <textarea name="comments" class="floatLabel"  id="comments"></textarea>
           <label for="comments">Other Requirements</label>
           </div>
-            <button type="submit" value="Submit" name="submit" class="col-1-4">BOOK</button>
-            <button type="submit" value="Submit" name="book" class="col-1-4">BOOK & PAY WIYH JUST $5</button>
+            <button type="submit" value="book" name="submit" class="col-1-4">BOOK</button>
+            <button type="submit" value="pay" name="book" class="col-1-4">BOOK & PAY WITH JUST $5</button>
       </div>  
   </div> <!-- /.form-group -->
 </form>
