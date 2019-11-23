@@ -1,4 +1,11 @@
 <?php
+	 include 'Razorpay.php';
+
+	 use Razorpay\Api\Api;
+	 $api = new Api('rzp_test_Q74V3QfdCceNFV', 'goAWdAi2XuZodpGsvxmbB6GR');
+
+
+
 	 //connect to the database
 	$conn = mysqli_connect('localhost', 'Babli', '12345', 'biba');
 	// check connection
@@ -8,7 +15,7 @@
 	$name = $email = $phone = $street = $city = $postCode = $state = $date = $tableFor = $ocassions =$comments  = '';
 	$errors = array('name' => '', 'email' => '', 'phone' => '', 'street' => '', 'city' => '', 'postCode' => '', 'state' => '', 'date' => '', 'tableFor' => '', 'ocassions' => '');
 	
-	if(isset($_POST['submit'])){
+	if(isset($_POST['submit']) || isset($_POST['book'])){
 		
 		// check name
 		if(empty($_POST['name'])){
@@ -117,6 +124,10 @@
 			$date = mysqli_real_escape_string($conn, $_POST['date']);
 			$state = mysqli_real_escape_string($conn, $_POST['state']);
 			$Id = md5($email).uniqid();
+			$price = '350';
+			if($_POST['submit' = "Submit"]){
+
+			}
 
 			// create sql
 			$sql = "INSERT INTO reservation(Name, Email, Phone_number, Street, City, PostCode, State, rDate, Table_for, Ocassions, Other_requirements, cStatus, id) VALUES('$name', '$email', '$phone', '$street', '$city', '$postCode', '$state', '$date', '$tableFor', '$ocassions', '$comments', 'Pending', '$Id')";
@@ -130,6 +141,10 @@
 			}
 		}
 	} // end POST check
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -262,7 +277,8 @@ BULLETS
           <textarea name="comments" class="floatLabel"  id="comments"></textarea>
           <label for="comments">Other Requirements</label>
           </div>
-            <button type="submit" value="Submit" name="submit" class="col-1-4">Submit</button>
+            <button type="submit" value="Submit" name="submit" class="col-1-4">BOOK</button>
+            <button type="submit" value="Submit" name="book" class="col-1-4">BOOK & PAY WIYH JUST $5</button>
       </div>  
   </div> <!-- /.form-group -->
 </form>
