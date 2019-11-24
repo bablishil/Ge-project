@@ -130,7 +130,12 @@
 					$sql = "INSERT INTO reservation(Name, Email, Phone_number, Street, City, PostCode, State, rDate, Table_for, Ocassions, Other_requirements, cStatus, id, paymentid) VALUES('$name', '$email', '$phone', '$street', '$city', '$postCode', '$state', '$date', '$tableFor', '$ocassions', '$comments', 'Pending', '$Id', '')";
 
 			
-			if(isset($_POST['book'])){
+			if(mysqli_query($conn, $sql)){
+
+				// success
+				//header('location: ../index.php');
+
+				if(isset($_POST['book'])){
 
 				$order = $api->order->create(array('amount' => $price, 'currency' => 'INR')); 
 				
@@ -180,19 +185,14 @@
 									r();
 							</script>";
 					}
-			/*$paymentid = $_POST['payid'];
-			echo $paymentid;
-				// create sql
-					$sql = "INSERT INTO reservation(Name, Email, Phone_number, Street, City, PostCode, State, rDate, Table_for, Ocassions, Other_requirements, cStatus, id, paymentid) VALUES('$name', '$email', '$phone', '$street', '$city', '$postCode', '$state', '$date', '$tableFor', '$ocassions', '$comments', 'Pending', '$Id', '$paymentid')";
-*/
+			
 			}
 
-			// sleep(180);
-			// save to db and check
-			if(mysqli_query($conn, $sql)){
-				// success
-				//header('location: ../index.php');
+			else{
 				 echo ' <script type = "text/javascript"> alert("reservation form submitted successfully")</script>';
+			}
+
+				
 			} else {
 				echo 'query error: '. mysqli_error($conn);
 			}
