@@ -138,7 +138,7 @@
 					
 					if(!empty($order)){
 
-
+							echo "hello";
 						
 							echo "<script src='https://checkout.razorpay.com/v1/checkout.js'></script>
 									<script>
@@ -150,9 +150,13 @@
     									'description': '',
     									'image': 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT2FwmyVgeSlIWe9vcMo7LJCmhjO9ioWf3NdTjY2p8Mp3YcP7EA',
     									'order_id': '$order->id',
-    									'handler': function (response){
-        								     var input = document.getElementById('payid');
-        								     input.value = response.razorpay_payment_id;
+    									'handler': function(response){
+    										var data = {
+    											payid: response.razorpay_payment_id,
+    											id: '$Id',
+    										}
+    										$.post('payid.php', data);
+        								   
    										 },
     									'prefill': {
     									    'name': '$name',
@@ -176,18 +180,19 @@
 									r();
 							</script>";
 					}
-			$paymentid = $_POST['payid'];
+			/*$paymentid = $_POST['payid'];
+			echo $paymentid;
 				// create sql
 					$sql = "INSERT INTO reservation(Name, Email, Phone_number, Street, City, PostCode, State, rDate, Table_for, Ocassions, Other_requirements, cStatus, id, paymentid) VALUES('$name', '$email', '$phone', '$street', '$city', '$postCode', '$state', '$date', '$tableFor', '$ocassions', '$comments', 'Pending', '$Id', '$paymentid')";
-
+*/
 			}
 
-			
+			// sleep(180);
 			// save to db and check
 			if(mysqli_query($conn, $sql)){
 				// success
-				header('location: ../index.php');
-				// echo ' <script type = "text/javascript"> alert("reservation form submitted successfully")</script>';
+				//header('location: ../index.php');
+				 echo ' <script type = "text/javascript"> alert("reservation form submitted successfully")</script>';
 			} else {
 				echo 'query error: '. mysqli_error($conn);
 			}
@@ -202,6 +207,8 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="../css/reservation.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+
 	
 	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css">
@@ -342,3 +349,5 @@ BULLETS
 
 </body>
 </html>
+<!--  154  var input = document.getElementById('payid');
+        								   input.value = response.razorpay_payment_id; -->
